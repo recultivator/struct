@@ -1,0 +1,80 @@
+#include "stdafx.h"
+#include "stdlib.h"
+#include "stdio.h"
+#include "string.h"
+
+typedef struct 
+{
+	char slovo[10];
+	char slovo2[10];
+}main_list;
+
+typedef struct main_elem
+{
+    main_list info;
+    struct main_elem *next;
+}main_elem;
+ 
+typedef struct{
+    int size;
+    main_elem *head;
+}list;
+
+list *init_list(void)
+{
+    list *elem = (list*) malloc(sizeof(list));
+    elem->head = NULL;
+    return elem;
+}
+
+main_elem *init_main_elem(void)
+{
+    main_elem *elem_ = (main_elem*) malloc(sizeof(main_elem));
+    elem_->next = 0;
+    return elem_;
+}
+ 
+int insert_elem(list *elem, main_list info)
+{
+    main_elem *elem_ = init_main_elem();
+    elem_->info = info;
+    elem_->next = elem->head;
+    elem->head = elem_;
+    elem->size++;
+    return 1;
+}
+
+void Print(list *elem)
+{
+    main_elem *elem_;
+    int i=0;
+    for(elem_ = elem->head; elem != NULL; elem_ = elem_->next){
+        i++;
+		printf("%s %s", elem_->info.slovo, elem_->info.slovo2);
+    }
+}
+
+int main()
+{
+	main_list info;
+    list *elem = init_list();
+	printf("chislo: \n");
+	scanf("%s %s",info.slovo);
+    printf("slovo: \n");
+	gets(info.slovo2);
+    /*do{
+        printf("chislo: \n");
+		scanf("%s %s",info.slovo);
+        printf("slovo: \n");
+		//scanf("%c",info.slovo);
+		gets(info.slovo2);
+        insert_elem(elem, info);
+        n--;
+	}while(strcmp(info.slovo, ""));
+    Print(elem);
+    printf("Введите номер записи которую нужно удалить: ");
+    scanf("%d", &n);
+    Del(ls, n);
+    Print(elem);*/
+	return 0;
+}
