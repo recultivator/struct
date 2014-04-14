@@ -6,8 +6,8 @@
 /*основные элементы*/
 typedef struct 
 {
-	char slovo[10];
-	char slovo2[10];
+    char slovo[10];
+    char slovo2[10];
 }main_list;
 
 typedef struct main_elem
@@ -45,6 +45,27 @@ int insert_elem(list *elem, main_list info)
     return 1;
 }
 
+int insert_new_element(list *elem, int num)
+{
+        main_elem *elem_, *left, *right;
+        int i = 0;
+        if((num<0)||(num>=elem->size)) return 0;
+        if (num==0)
+		{
+			elem_=elem->head->next;
+            free(elem->head);
+            elem->head=elem_;
+            return 1;
+        }
+        for(left= elem->head; i != num-1; elem_ = elem_->next) i++;
+        elem_ = left->next;
+        right=elem_->next;
+        free(elem_); 
+        left->next=right;
+		elem->size--;
+        return 1;
+}
+
 void Print(list *elem)
 {
     main_elem *elem_;
@@ -53,6 +74,18 @@ void Print(list *elem)
         i++;
 		printf("%s %s", elem_->info.slovo,elem_->info.slovo2);
     }
+}
+
+void *Add(main_list *ppHead, char *slovo, char *slovo2)
+{
+    main_list *pOldHead = ppHead;
+    main_elem *pNewHead; 
+    pNewHead = new main_elem;
+    strcpy(pNewHead->, slovo);  
+	strcpy(pNewHead->slovo2, slovo2);
+    pNewHead->next = pOldHead;
+    *ppHead = pNewHead;
+    return (void *) pNewHead;
 }
 
 int main()
