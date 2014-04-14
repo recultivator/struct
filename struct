@@ -7,13 +7,13 @@
 typedef struct 
 {
     char slovo[10];
-    char slovo2[10];
 }main_list;
 
 typedef struct main_elem
 {
     main_list info;
     struct main_elem *next;//следующий элемент
+	struct main_elem *pred;//предыдущий элемент
 }main_elem;
  
 typedef struct{
@@ -45,7 +45,7 @@ int insert_elem(list *elem, main_list info)
     return 1;
 }
 
-int insert_new_element(list *elem, int num)
+/*int insert_new_element(list *elem, int num)
 {
         main_elem *elem_, *left, *right;
         int i = 0;
@@ -66,16 +66,6 @@ int insert_new_element(list *elem, int num)
         return 1;
 }
 
-void Print(list *elem)
-{
-    main_elem *elem_;
-    int i=0;
-    for(elem_ = elem->head; elem_ != NULL; elem_ = elem_->next){
-        i++;
-		printf("%s %s", elem_->info.slovo,elem_->info.slovo2);
-    }
-}
-
 void *Add(main_list *ppHead, char *slovo, char *slovo2)
 {
     main_list *pOldHead = ppHead;
@@ -86,6 +76,16 @@ void *Add(main_list *ppHead, char *slovo, char *slovo2)
     pNewHead->next = pOldHead;
     *ppHead = pNewHead;
     return (void *) pNewHead;
+}*/
+
+void Print(list *elem)
+{
+    main_elem *elem_;
+    int i=0;
+    for(elem_ = elem->head; elem_ != NULL; elem_ = elem_->next){
+        i++;
+		printf("%s", elem_->info.slovo);
+    }
 }
 
 int main()
@@ -97,8 +97,6 @@ int main()
 	{
         printf("slovo: \n");
 		gets(info.slovo);
-		printf("slovo2: \n");
-		gets(info.slovo2);
         insert_elem(elem, info);
 	}while(strlen(info.slovo)>0);
     Print(elem);
