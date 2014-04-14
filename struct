@@ -3,6 +3,7 @@
 #include "stdio.h"
 #include "string.h"
 
+/*основные элементы*/
 typedef struct 
 {
 	char slovo[10];
@@ -12,7 +13,7 @@ typedef struct
 typedef struct main_elem
 {
     main_list info;
-    struct main_elem *next;
+    struct main_elem *next;//следующий элемент
 }main_elem;
  
 typedef struct{
@@ -48,33 +49,26 @@ void Print(list *elem)
 {
     main_elem *elem_;
     int i=0;
-    for(elem_ = elem->head; elem != NULL; elem_ = elem_->next){
+    for(elem_ = elem->head; elem_ != NULL; elem_ = elem_->next){
         i++;
-		printf("%s %s", elem_->info.slovo, elem_->info.slovo2);
+		printf("%s %s", elem_->info.slovo,elem_->info.slovo2);
     }
 }
 
 int main()
 {
+	int d,n;
 	main_list info;
     list *elem = init_list();
-	printf("chislo: \n");
-	scanf("%s %s",info.slovo);
-    printf("slovo: \n");
-	gets(info.slovo2);
-    /*do{
-        printf("chislo: \n");
-		scanf("%s %s",info.slovo);
+    do
+	{
         printf("slovo: \n");
-		//scanf("%c",info.slovo);
+		gets(info.slovo);
+		printf("slovo2: \n");
 		gets(info.slovo2);
         insert_elem(elem, info);
-        n--;
-	}while(strcmp(info.slovo, ""));
+	}while(strlen(info.slovo)>0);
     Print(elem);
-    printf("Введите номер записи которую нужно удалить: ");
-    scanf("%d", &n);
-    Del(ls, n);
-    Print(elem);*/
+	scanf("%d",&d);
 	return 0;
 }
